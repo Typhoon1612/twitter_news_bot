@@ -5,12 +5,23 @@ import OpenAI from 'openai'
 
 const parser = new Parser()
 
-const client = new TwitterApi({
-  appKey: process.env.API_KEY,
-  appSecret: process.env.API_SECRET,
-  accessToken: process.env.ACCESS_TOKEN,
-  accessSecret: process.env.ACCESS_SECRET
-})
+// Initialize Twitter client only if credentials are provided
+let client = null
+try {
+  if (process.env.API_KEY && process.env.API_SECRET && process.env.ACCESS_TOKEN && process.env.ACCESS_SECRET) {
+    client = new TwitterApi({
+      appKey: process.env.API_KEY,
+      appSecret: process.env.API_SECRET,
+      accessToken: process.env.ACCESS_TOKEN,
+      accessSecret: process.env.ACCESS_SECRET
+    })
+    console.log('✅ Twitter client initialized')
+  } else {
+    console.log('⚠️  Twitter credentials not found - bot will not post')
+  }
+} catch (error) {
+  console.error('❌ Failed to initialize Twitter client:', error.message)
+}
 
 let lastPosted = ''
 
@@ -36,6 +47,12 @@ async function fetchNews() {
 
 async function run() {
   try {
+    // Skip if Twitter client is not initialized
+    if (!client) {
+      console.log('⚠️  Skipping run - Twitter client not initialized')
+      return
+    }
+
     const news = await fetchNews()
     if (!news) return
 
@@ -55,8 +72,12 @@ async function run() {
   }
 }
 
-run()
-setInterval(run, 480 * 60_000)
+// Start the bot after a short delay to allow web server to initialize
+setTimeout(() => {
+  console.log('🚀 Starting bot - first run in 30 seconds')
+  setTimeout(run, 30_000) // First run after 30 seconds
+  setInterval(run, 480 * 60_000) // Then every 8 hours
+}, 1000)
 
 // Helpers
 function truncateTo(input, max) {
