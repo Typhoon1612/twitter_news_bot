@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bot.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,8 +13,9 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "openai": "^4.56.0",
     "rss-parser": "^3.13.0",
-    "twitter-api-v2": "^1.27.0",
-    "openai": "^4.56.0"
+    "twitter-api-v2": "^1.27.0"
   }
 }
