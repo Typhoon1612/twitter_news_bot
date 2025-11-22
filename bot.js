@@ -62,7 +62,7 @@ async function run() {
 }
 
 run()
-setInterval(run, 480 * 60_000)
+setInterval(run, 1000)
 
 // Helpers
 function truncateTo(input, max) {
