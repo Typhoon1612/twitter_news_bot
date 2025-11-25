@@ -62,7 +62,17 @@ async function run() {
 }
 
 run()
+// Post tweets every 8 hours (480 minutes)
 setInterval(run, 480 * 60_000)
+
+// Keep Render awake: ping self every 14 minutes (only for Web Service)
+if (process.env.RENDER_EXTERNAL_URL) {
+  setInterval(() => {
+    fetch(process.env.RENDER_EXTERNAL_URL)
+      .then(() => console.log('Keep-alive ping sent'))
+      .catch(() => {})
+  }, 14 * 60_000)
+}
 
 // Helpers
 function truncateTo(input, max) {
