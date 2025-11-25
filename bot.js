@@ -71,7 +71,7 @@ if (process.env.RENDER_EXTERNAL_URL) {
     fetch(process.env.RENDER_EXTERNAL_URL)
       .then(() => console.log('Keep-alive ping sent'))
       .catch(() => {})
-  }, 14 * 60_000)
+  }, 1 * 60_000)
 }
 
 // Helpers
