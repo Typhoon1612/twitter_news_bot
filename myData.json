@@ -9,7 +9,6 @@
     "newsAPIKeys": [
         "https://cointelegraph.com/rss",
         "https://cryptonews.com/news/feed/",
-        "https://news.google.com/rss/search?q=crypto&hl=en-US&gl=US&ceid=US:en",
-        "https://cryptoslate.com/feed/"
+        "https://news.google.com/rss/search?q=crypto&hl=en-US&gl=US&ceid=US:en"
     ]
 }
