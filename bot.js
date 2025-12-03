@@ -76,7 +76,7 @@ async function run() {
 
 run()
 // Post tweets every 8 hours (480 minutes)
-setInterval(run, 1,440 * 60_000)
+setInterval(run, 1440 * 60_000)
 
 // Keep Render awake: ping self every 14 minutes (only for Web Service)
 if (process.env.RENDER_EXTERNAL_URL) {
